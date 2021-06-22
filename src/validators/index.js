@@ -1,10 +1,7 @@
 import { blogSchema } from "./schemas";
 
-const validInputBlog = newBlog => {
-  const { error } = blogSchema.validate(newBlog);
-  if (error) throw new Error(error);
+const validInputBlog = input => {
+  return blogSchema.validateAsync(input);
 };
 
-export default {
-  validInputBlog
-};
+export { validInputBlog };

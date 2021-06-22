@@ -1,22 +1,16 @@
-import Sequelize from "sequelize";
-import sequelize from "../configs/sequelize.config";
+var mongoose = require("mongoose");
+var Schema = mongoose.Schema;
 
-class BogModel extends Sequelize.Model {}
-BogModel.init(
+var schema = new Schema(
   {
-    name: {
-      type: Sequelize.STRING,
-      allowNull: false
-    },
-    title: {
-      type: Sequelize.STRING,
-      allowNull: false
-    }
+    title: String
   },
   {
-    sequelize,
-    modelName: "blogs"
+    timestamps: true,
+    toJSON: { virtuals: true }
   }
 );
 
-export default BogModel;
+const model = mongoose.model("blog", schema);
+
+export default model;

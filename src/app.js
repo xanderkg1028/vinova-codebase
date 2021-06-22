@@ -1,10 +1,16 @@
-require("dotenv");
+import path from "path";
+require("dotenv").config({ path: path.join(__dirname, "../.env") });
 import express from "express";
 import logger from "morgan";
 import cors from "cors";
 import helmet from "helmet";
 import compression from "compression";
-import routers from "./routers";
+import "./configs/mongoose.config";
+import routes from "./routes";
+import swaggerUi from "swagger-ui-express";
+import swaggerJsdoc from "swagger-jsdoc";
+import swaggerDocumentJson from "../swagger.json";
+
 const app = express();
 
 app.use(cors());
@@ -24,7 +30,9 @@ app.use(
 );
 
 // set routers
-app.use("/api", routers);
+app.use("/api", routes);
+const specs = swaggerJsdoc(swaggerDocumentJson);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 // handling error
 app.use((err, req, res, next) => {
