@@ -4,7 +4,7 @@ This is base source is used express js
 ## Overview
 
 This source has features are as below:
-    - CRUD Blog
+- CRUD Blog
 
 **Command**:
 
